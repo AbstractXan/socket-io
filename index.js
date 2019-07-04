@@ -16,9 +16,9 @@ io.on('connection', function(socket){
     console.log(socket.id , 'user connected');
 
     // On message
-    socket.on('token',function(msg){
-        console.log(socket.id, msg);
-    })
+    socket.on('chat message', function(msg){
+        io.emit('chat message', msg);
+      });
 
     // On disconnect
     socket.on('disconnect', function(){
