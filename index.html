@@ -25,7 +25,7 @@
         <script>
             $(function () {
                 var token = 'token';
-                var socket = io('https://socket-bt.herokuapp.com:'+ $('port').val()+'?token='+token);
+                var socket = io('https://socket-bt.herokuapp.com:'+ $('port').val());
                 $('form').submit(function(e){
                     e.preventDefault(); // prevents page reloading
                     socket.emit('token', $('#m').val());

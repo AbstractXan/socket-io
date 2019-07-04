@@ -12,12 +12,12 @@ app.get('/', function(req, res){
 });
 
 io.on('connection', function(socket){
-    let token = socket.handshake.query.token;
+    // let token = socket.handshake.query.token;
     console.log(socket.id , 'user connected');
 
     // On message
     socket.on('token',function(msg){
-        console.log(token, socket.id, msg);
+        console.log(socket.id, msg);
     })
 
     // On disconnect
