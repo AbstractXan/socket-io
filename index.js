@@ -9,22 +9,22 @@ if (port == null || port == "") {
 
 app.get('/', function(req, res){
     res.sendFile(__dirname + '/index.html');  
-    res.sendFile(__dirname + '/chat.js');
 });
 
 io.on('connection', function(socket){
+    let token = socket.handshake.query.token;
     console.log(socket.id , 'user connected');
+
+    // On message
+    socket.on('token',function(msg){
+        console.log(token, socket.id, msg);
+    })
 
     // On disconnect
     socket.on('disconnect', function(){
         console.log(socket.id, 'user disconnected');
     });
-    let token = socket.handshake.query.token;
-
-    // On message
-    socket.on(token,function(msg){
-        console.log(token, socket.id, msg);
-    })
+ 
 });
   
 http.listen(port, function(){

@@ -14,14 +14,25 @@
     </head>
     <body>
         <!-- <h1> Hello World </h1> -->
-        <script src="/socket.io/socket.io.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.0.1/socket.io.js"></script>
         <script src="https://code.jquery.com/jquery-1.11.1.js"></script>
 
         <form action="">
+            <input id="port">
             <input id="m" autocomplete="off" /><button>Send</button>
         </form>
 
-        <script src="/chat.js">
+        <script>
+            $(function () {
+                var token = 'token';
+                var socket = io('https://socket-bt.herokuapp.com:'+ $('port').val()+'?token='+token);
+                $('form').submit(function(e){
+                    e.preventDefault(); // prevents page reloading
+                    socket.emit('token', $('#m').val());
+                    $('#m').val('');
+                    return false;
+                });
+            });
         </script>
     </body>
 </html>
