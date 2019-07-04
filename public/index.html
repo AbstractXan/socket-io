@@ -23,7 +23,7 @@
 
         <script>
             $(function () {
-                var socket = io('http://socket-bt.herokuapp.com?token=abc');
+                var socket = io('https://socket-bt.herokuapp.com:3000?token=abc');
                 $('form').submit(function(e){
                     e.preventDefault(); // prevents page reloading
                     socket.emit('abc', $('#m').val());
