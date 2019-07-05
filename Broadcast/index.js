@@ -11,29 +11,15 @@ app.get('/', function(req, res){
     res.sendFile(__dirname + '/index.html');  
 });
 
-app.get('/app', function(req, res){
-    res.sendFile(__dirname + '/app.html');  
-});
-
 io.on('connection', function(socket){
     // let token = socket.handshake.query.token;
     console.log(socket.id , 'user connected');
 
     // On message
-    socket.on('new', function(token){
-        console.log(token, " recieved");
-        socket.join(token);
-    });
+    socket.on('chat message', function(msg){
+        io.emit('chat message', msg);
+      });
 
-    socket.on('appconn', function(token){
-        console.log(" App trying to connect to : " , token);
-        socket.join(token);
-    });
-
-    socket.on('message', function(token,message){
-        console.log(" Recieved token ", token, " message: ", message);
-        socket.to(token).emit('message', message);
-    })
     // On disconnect
     socket.on('disconnect', function(){
         console.log(socket.id, 'user disconnected');

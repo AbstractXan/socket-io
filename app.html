@@ -31,9 +31,6 @@
                 var token = $('#t').val();
                 var socket = io();
 
-                // Send new token
-                
-
                 $('input').on('keyup', function() {
                 if (this.value.length > 1) {
                         token = $('#t').val();
@@ -48,10 +45,11 @@
                 $('form').submit(function(e){
                     e.preventDefault(); // prevents page reloading
                     token = $('#t').val();
-                    socket.emit('message', token, $('#m').val());
+                    socket.emit('message',token, $('#m').val());
                     $('#m').val('');
                     return false;
                 });
+
                 socket.on('message', function(msg){
                     $('#messages').append($('<li>').text(msg));
                 });
