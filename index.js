@@ -30,9 +30,9 @@ io.on('connection', function(socket){
         socket.join(token);
     });
 
-    socket.on('message', function(token,message){
-        console.log(" Recieved token ", token, " message: ", message);
-        socket.to(token).emit('message', message);
+    socket.on('message', function(data){
+        console.log(" Recieved token ", data.token, " message: ", data.message);
+        socket.to(data.token).emit('message', data.message);
     })
     // On disconnect
     socket.on('disconnect', function(){
